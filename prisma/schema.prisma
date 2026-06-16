@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Analysis {
+  id        Int      @id @default(autoincrement())
+  fileName  String
+  language  String
+  result    String
+  createdAt DateTime @default(now())
+}

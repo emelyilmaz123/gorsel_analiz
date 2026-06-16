@@ -1,0 +1,8 @@
+-- CreateTable
+CREATE TABLE "Analysis" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "fileName" TEXT NOT NULL,
+    "language" TEXT NOT NULL,
+    "result" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
