@@ -25,14 +25,17 @@ export async function POST(request: NextRequest) {
 - Hikayeler, önerilen hesaplar, reklamlar (varsa)
 - Genel olarak ekranda ne görünüyor, kim ne paylaşmış
 - Türkçe olarak detaylıca açıkla`
-        : `Analyze this Instagram screenshot in very detail. Explain EVERYTHING you see one by one:
+        : `IMPORTANT: You MUST respond ONLY in English. Do not use any other language.
+
+Analyze this Instagram screenshot in very detail. Explain EVERYTHING you see one by one:
 - Profile information (username, follower count, following count, bio)
 - Post content (what's there, what it says, what it looks like)
 - Like count, comment count, save count
 - Comments (if any, what they say)
 - Stories, suggested accounts, ads (if any)
 - What's generally visible on the screen, who posted what
-- Explain in detail in English`;
+
+Remember: Your entire response must be in English only.`;
 
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
@@ -43,6 +46,10 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: "nvidia/nemotron-nano-12b-v2-vl:free",
         messages: [
+          {
+            role: "system",
+            content: language === "en" ? "You are an assistant that ONLY responds in English. Never use any other language." : "Sen Türkçe yanıt veren bir asistansın.",
+          },
           {
             role: "user",
             content: [
